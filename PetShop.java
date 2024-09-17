@@ -1,5 +1,5 @@
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class PetShop {
     private ArrayList<Tutor> tutors = new ArrayList<>();
@@ -51,16 +51,19 @@ public class PetShop {
         Scanner scanner = new Scanner(System.in);
 
         PetShop petshop = new PetShop();
-        String option;
+        String option = "c";
 
-        switch (String opcao) {
+        switch (option) {
             case "c":
-                boolean stop = false;
-                while (!stop) {
+                while (true) {
                     System.out.println("Digite o nome do tutor (vazio encerra cadastro tutor): ");
                     String name = scanner.nextLine(); 
                     scanner.nextLine();
 
+                    name = name.trim();
+                    if(name.length() < 1){
+                        break;
+                    }
                     System.out.println("Digite o ano de nascimento do tutor: ");
                     scanner.nextInt();
                     int year = scanner.nextInt(); 
@@ -72,8 +75,8 @@ public class PetShop {
 
                     System.out.println("Digite o dia de nascimento do tutor: ");
                     int day = scanner.nextInt();
-                    scanner.nextLine(); 
-
+                    scanner.nextLine();
+                    
                     System.out.println("Digite o endereco do tutor/ Pet: ");
                     String address = scanner.nextLine();
                     scanner.nextLine();
@@ -81,15 +84,17 @@ public class PetShop {
                     int id = petshop.getTutors().get(petshop.getTutors().size() - 1).getId() + 1;
 
                     petshop.createTutor(id, name, year, month, day, address);
-                    boolean stopPet = false;
 
-                    while(!stopPet){
+                    while(true){
                         System.out.println("Digite o nome do pet (vazio encerra cadastro pet): ");
                         String petName = scanner.nextLine();
                         scanner.nextLine();
+
                         petName = petName.trim();
+
                         if(petName.length() < 1){
                             System.out.println("Tutor cadastrado");
+                            break;
                         }
 
                         System.out.println("Digite o tipo do pet: ");
@@ -107,15 +112,15 @@ public class PetShop {
     
                         System.out.println("Digite o dia de nascimento do pet: ");
                         int dayPet = scanner.nextInt();
-                        scanner.nextLine(); 
-    
+                        scanner.nextLine();
+                        
+                        petshop.addPet(id, petName, petType, yearPet, monthPet, dayPet);
 
-                    }
+                        System.out.println("Pet cadastrado! ");
                 }
-                break;
+            }
 
-            default:
-                throw new AssertionError();
+            default: throw new AssertionError();
         }
     }
 }
