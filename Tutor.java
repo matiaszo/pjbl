@@ -1,3 +1,4 @@
+import java.lang.classfile.instruction.ThrowInstruction;
 import java.time.*;
 import java.util.ArrayList;
 
@@ -9,7 +10,25 @@ public class Tutor {
     private int monthBirth;
     private int dayBirth;
     private int age;
-    private ArrayList<Pet> pets = new ArrayList<Pet>();
+    private int id;
+    private ArrayList<Pet> pets = new ArrayList<>();
+
+    public Tutor(int id, String name, int year, int month, int day, String address){
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.yearBirth = year;
+        this.monthBirth = month;
+        this.dayBirth = day;
+    }
+
+    public int getId(){
+        return this.id;
+    }
+
+    public void setId(int id){
+        this.id = id;
+    }
 
     public String getName() {
         return name;
