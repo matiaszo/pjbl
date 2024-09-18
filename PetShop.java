@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+// import java.util.System;
 
 public class PetShop {
     private ArrayList<Tutor> tutors = new ArrayList<>();
@@ -47,6 +48,7 @@ public class PetShop {
                 "; Data de nascimento: " + pet.getDayBirth() + "/" + pet.getMonthBirth() + "/" + pet.getYearBirth() + " (" + pet.getAge() + " anos)");
             }
         }
+        System.out.println();
     }
 
     public void searchPet(int tutor_id){
@@ -75,12 +77,14 @@ public class PetShop {
         }
     }
 
-    public void deleteTutor(int tutor_id){
-        Tutor tutor_eliminate = this.getTutors().get(tutor_id);
-        if (tutor_eliminate.getId() > 0) {
-            
-            tutors.remove(tutor_id);
+    public boolean deleteTutor(int tutor_id){
+        for(Tutor tutor : tutors){
+            if (tutor.getId() == tutor_id) {
+                tutors.remove(tutor);
+                return true;
+            }
         }
+        return false;
 }
 
     public static void clearBuffer(Scanner scanner){
@@ -107,30 +111,25 @@ public class PetShop {
                     String name = scanner.nextLine(); 
                     
                     name = name.trim();
-                    System.out.println(name.length());
                     if(name.length() < 1){
                         break;
                     }
                     System.out.println("Digite o ano de nascimento do tutor: ");
                     int year = scanner.nextInt(); 
-                    System.out.println(year);
                     clearBuffer(scanner);
 
                     System.out.println("Digite o mes de nascimento do tutor: ");
                     int month = scanner.nextInt();
                     clearBuffer(scanner);
-                    System.out.println(month);
 
 
                     System.out.println("Digite o dia de nascimento do tutor: ");
                     int day = scanner.nextInt();
                     clearBuffer(scanner);
-                    System.out.println(day);
 
                     
                     System.out.println("Digite o endereco do tutor/ Pet: ");
                     String address = scanner.nextLine();
-                    System.out.println(address);
 
                     int id = 0;
                     if (petshop.getTutors().size() == 0) {
@@ -145,7 +144,6 @@ public class PetShop {
                         String petName = scanner.nextLine();
 
                         petName = petName.trim();
-                        System.out.println(petName.length());
                         if(petName.length() < 1){
                             System.out.println("Tutor cadastrado");
                             break;
@@ -172,6 +170,7 @@ public class PetShop {
                         System.out.println();
                 }
             }
+            break;
 
             case "i":
                 System.out.println("--------CADASTRO DE TUTORES E PETS------------");
@@ -194,24 +193,29 @@ public class PetShop {
 
                 if (petshop.getTutors().size() < tutor_id) {
                     System.out.println("Nao existe um tutor com o id " + tutor_id);
+                    System.out.println();
                     break;
                 }
 
-                petshop.deleteTutor(tutor_id);
-                System.out.println("--- Tutor (+pets) com codigo"+ tutor_id + "excluido com sucesso! ---");
+                if(petshop.deleteTutor(tutor_id)){
+                    System.out.println("--- Tutor (+pets) com codigo "+ tutor_id + " excluido com sucesso! ---");
+
+                }else{
+                    System.out.println("Nao existe um tutor com o id " + tutor_id);
+                }
                 System.out.println();
                 break;
             case "x":
-                System.out.println("Saindo");
+                System.out.println("--- Programa de cadastro encerrado ---");
+                                        
+                System.exit(0);
                 System.out.println();
                 break;
 
             default:
-            System.out.println("No default");
             System.out.println();
             break;
         }
-        System.out.println("aqui");
     }
     }
 }
