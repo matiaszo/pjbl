@@ -19,6 +19,7 @@ public class Tutor {
         this.yearBirth = year;
         this.monthBirth = month;
         this.dayBirth = day;
+        setAge();
     }
 
     public int getId(){
