@@ -1,6 +1,8 @@
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.Scanner;
-// import java.util.System;
+// import java.time.*;
 
 public class PetShop {
     private ArrayList<Tutor> tutors = new ArrayList<>();
@@ -12,8 +14,8 @@ public class PetShop {
         this.tutors = tutors;
     }
 
-    public void createTutor(int id, String name, int year, int month, int day, String address){
-        Tutor tutor = new Tutor(id,name,year,month, day, address);
+    public void createTutor(int id, String name, int year, int month, int day,int age, String address){
+        Tutor tutor = new Tutor(id,name,year,month, day, age, address);
         this.tutors.add(tutor);
     }
 
@@ -90,18 +92,30 @@ public class PetShop {
     public static void clearBuffer(Scanner scanner){
         if (scanner.hasNextLine()) {
             scanner.nextLine();
+            System.out.println("no buffer!!");
         }
     }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         int tutor_id = 0;
+        int year = 0;
+        int month = 0;
+        int day = 0;
+        int age = 0;
         PetShop petshop = new PetShop();
         while (true) {
             
         System.out.println("***** ESCOLHER UMA OPCAO *****: ");
+        System.out.println("c: cadastrar tutor + pet(s) ");
+        System.out.println("i: imprimir cadastro");
+        System.out.println("b: buscar pets por codigo tutor");
+        System.out.println("e: excluir pets por codigo tutor");
+        System.out.println("x: encerrar.");
         
-        String option = scanner.nextLine();
+        String option = scanner.next();
+        System.out.println("Opcao escolhida: " + option);
+        
 
         switch (option) {
 
@@ -114,19 +128,33 @@ public class PetShop {
                     if(name.length() < 1){
                         break;
                     }
-                    System.out.println("Digite o ano de nascimento do tutor: ");
-                    int year = scanner.nextInt(); 
-                    clearBuffer(scanner);
-
-                    System.out.println("Digite o mes de nascimento do tutor: ");
-                    int month = scanner.nextInt();
-                    clearBuffer(scanner);
-
-
-                    System.out.println("Digite o dia de nascimento do tutor: ");
-                    int day = scanner.nextInt();
-                    clearBuffer(scanner);
-
+                    while (true) {
+                        
+                        try {
+                            System.out.println("Digite o ano de nascimento do tutor: ");
+                            year = scanner.nextInt(); 
+                            clearBuffer(scanner);
+        
+                            System.out.println("Digite o mes de nascimento do tutor: ");
+                            month = scanner.nextInt();
+                            clearBuffer(scanner);
+        
+                            System.out.println("Digite o dia de nascimento do tutor: ");
+                            day = scanner.nextInt();
+                            clearBuffer(scanner);
+    
+                            LocalDate birthdate = LocalDate.of(year, month, year);
+                            LocalDate currentDate = LocalDate.now();
+        
+                            Period period = Period.between(birthdate, currentDate);
+                            age = period.getYears(); 
+                            break;
+                            
+                        } catch (Exception e) {
+                            System.out.println("Voce precisa digitar uma data valida!");
+                            System.out.println("O erro ocorrido foi: "+ e);
+                        }
+                    }
                     
                     System.out.println("Digite o endereco do tutor/ Pet: ");
                     String address = scanner.nextLine();
@@ -137,7 +165,7 @@ public class PetShop {
                     }else{
                      id = petshop.getTutors().get(petshop.getTutors().size() - 1).getId() + 1;
                 }
-                    petshop.createTutor(id, name, year, month, day, address);
+                    petshop.createTutor(id, name, year, month, day, age, address);
 
                     while(true){
                         System.out.println("Digite o nome do pet (vazio encerra cadastro pet): ");
@@ -213,6 +241,7 @@ public class PetShop {
                 break;
 
             default:
+            System.out.println("Voce precisa digitar uma das opcoes mostradas!!");
             System.out.println();
             break;
         }

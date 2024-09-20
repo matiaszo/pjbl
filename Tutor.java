@@ -1,6 +1,5 @@
-import java.time.*;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 
 public class Tutor {
     private String name;
@@ -12,21 +11,21 @@ public class Tutor {
     private int id;
     private ArrayList<Pet> pets = new ArrayList<>();
 
-    public Tutor(int id, String name, int year, int month, int day, String address){
+    public Tutor(int id, String name, int year, int month, int day, int age, String address) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.yearBirth = year;
         this.monthBirth = month;
         this.dayBirth = day;
-        setAge();
+        this.age = age;
     }
 
-    public int getId(){
+    public int getId() {
         return this.id;
     }
 
-    public void setId(int id){
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -53,6 +52,7 @@ public class Tutor {
     public void setYearBirth(int yearBirth) {
         this.yearBirth = yearBirth;
     }
+
     public int getMonthBirth() {
         return this.monthBirth;
     }
@@ -60,6 +60,7 @@ public class Tutor {
     public void setMonthBirth(int monthBirth) {
         this.monthBirth = monthBirth;
     }
+
     public int getDayBirth() {
         return this.dayBirth;
     }
@@ -68,17 +69,11 @@ public class Tutor {
         this.dayBirth = dayBirth;
     }
 
-    public int getAge(){
+    public int getAge() {
         return this.age;
     }
 
-    public void setAge(){
-        LocalDate birthdate = LocalDate.of(getYearBirth(), getMonthBirth(), getDayBirth());
-        LocalDate currentDate = LocalDate.now();
-
-        Period period = Period.between(birthdate, currentDate);
-        int age = period.getYears();    
-
+    public void setAge(int age) {
         this.age = age;
     }
 
