@@ -42,7 +42,7 @@ public class PetShop {
             System.out.println("Codigo do tutor: " + id);
             System.out.println("    Nome: " + name);
             System.out.println("    Data nascimento: " + dayBirth + "/" + monthBirth + "/" + yearBirth + " (" + age + " anos)");
-            System.out.println("    Endereco: " + address);
+            System.out.println("    Endereco: " + address + "\n");
             System.out.println("    Relacao de pets:");
 
             for (Pet pet : tutor.getPets()) {
@@ -50,13 +50,16 @@ public class PetShop {
                 "; Tipo: " + pet.getType() +
                 "; Data de nascimento: " + pet.getDayBirth() + "/" + pet.getMonthBirth() + "/" + pet.getYearBirth() + " (" + pet.getAge() + " anos)");
             }
+            System.out.println();    
+            System.out.println();    
         }
-        System.out.println();
     }
 
     public void searchPet(int tutor_id){
+        boolean localized = false;
         for (Tutor tutor : tutors){
             if (tutor.getId() == tutor_id) {
+            localized = true;
             String name = tutor.getName();
             int yearBirth = tutor.getYearBirth();
             int monthBirth = tutor.getMonthBirth();
@@ -68,16 +71,24 @@ public class PetShop {
             System.out.println("Nome: " + name);
             System.out.println("Data nascimento: " + dayBirth + "/" + monthBirth + "/" + yearBirth + " (" + age + " anos)");
             System.out.println("Endereco: " + address);
-
+            
             System.out.println("Relação de pets:");
-
+            
             for (Pet pet : tutor.getPets()) {
                 System.out.println("Nome do pet: " + pet.getName() +
                 "; Tipo: " + pet.getType() +
                 "; Data de nascimento: " + pet.getDayBirth() + "/" + pet.getMonthBirth() + "/" + pet.getYearBirth() + " (" + pet.getAge() + " anos)");
             }
-            }
         }
+    }
+    if (!localized) {
+        System.out.println("\n-----------------------------------------------");
+        System.out.println("Tutor com codigo " + tutor_id + " nao localizado!");
+        System.out.println("-----------------------------------------------\n");
+        return;
+    }
+        System.out.println("----------------------------");
+        System.out.println();
     }
 
     public boolean deleteTutor(int tutor_id){
@@ -153,9 +164,11 @@ public class PetShop {
                         validDate = true; 
 
                     } catch (NumberFormatException e) {
-                        System.out.println("Você precisa digitar um número válido para o ano o mês e o dia.");
+                        System.out.println("Você precisa digitar um número válido para o ano o mês e o dia. \n");
+                        System.out.println();
                     } catch (DateTimeException e) {
-                        System.out.println("Data inválida, Tente novamente.");
+                        System.out.println("Data inválida, Tente novamente. \n");
+                        System.out.println();
                     }
                 }
 
@@ -172,7 +185,7 @@ public class PetShop {
                     String petName = scanner.nextLine().trim();
 
                     if (petName.isEmpty()) {
-                        System.out.println("Tutor cadastrado");
+                        System.out.println("Tutor cadastrado \n");
                         break;
                     }
 
@@ -198,9 +211,9 @@ public class PetShop {
                             validPetDate = true; 
 
                         } catch (NumberFormatException e) {
-                            System.out.println("Você precisa digitar um número válido para o ano, mês e dia do pet.");
+                            System.out.println("Você precisa digitar um número válido para o ano, mês e dia do pet!\n");
                         } catch (DateTimeException e) {
-                            System.out.println("Data inválida para o pet! Tente novamente.");
+                            System.out.println("Data inválida para o pet! Tente novamente.\n");
                         }
                     }
 
@@ -219,36 +232,54 @@ public class PetShop {
                 break;
 
             case "b":
-                System.out.println("Digite o codigo do tutor a ser localizado: ");
-                tutor_id = scanner.nextInt();
-                clearBuffer(scanner);
-                petshop.searchPet(tutor_id);
-                break;
-
-            case "e":
-                System.out.print("Digite o codigo do tutor a ser excluido: ");
-                tutor_id = scanner.nextInt();
-                clearBuffer(scanner);
-
-                if (petshop.getTutors().size() < tutor_id) {
-                    System.out.println("Nao existe um tutor com o id " + tutor_id);
-                    System.out.println();
+            boolean validCodeLocalize = false;
+            while (!validCodeLocalize) {
+                try {
+                    System.out.println("Digite o codigo do tutor a ser localizado: ");
+                    tutor_id = Integer.parseInt(scanner.nextLine().trim());
+                    petshop.searchPet(tutor_id);
+                    validCodeLocalize = true;
                     break;
+                    
+                } catch (Exception e) {
+                    System.out.println("\n-------------------------------");
+                    System.out.println("Voce precisa digitar um numero!");
+                    System.out.println("-------------------------------\n");
                 }
-
-                if(petshop.deleteTutor(tutor_id)){
-                    System.out.println("--- Tutor (+pets) com codigo "+ tutor_id + " excluido com sucesso! ---");
-
-                }else{
-                    System.out.println("Nao existe um tutor com o id " + tutor_id);
+            }
+            break;
+            case "e":
+            boolean validCodeDelete = false;
+            while (!validCodeDelete) {
+                try {
+                    
+                    System.out.print("Digite o codigo do tutor a ser excluido: ");
+                    tutor_id = Integer.parseInt(scanner.nextLine().trim());
+    
+                    if (petshop.getTutors().size() < tutor_id || tutor_id == 0) {
+                        if(petshop.deleteTutor(tutor_id)){
+                            System.out.println("--- Tutor (+pets) com codigo "+ tutor_id + " excluido com sucesso! ---");
+            
+                        }else{
+                            System.out.println("\nNao existe um tutor com o id " + tutor_id + "!!\n");
+                        }
+                        System.out.println();
+                        validCodeDelete = true;
+                        break;
+                    }
+                } catch (Exception e) {
+                    System.out.println("-------------------------------");
+                    System.out.println("Voce precisa digitar um numero!");
+                    System.out.println("-------------------------------\n");
                 }
-                System.out.println();
-                break;
+            }
+            break;
             case "x":
                 System.out.println("--- Programa de cadastro encerrado ---");
                                         
                 System.exit(0);
                 System.out.println();
+                scanner.close();
                 break;
 
             default:
