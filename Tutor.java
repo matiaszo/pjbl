@@ -1,4 +1,4 @@
-import java.util.ArrayList; // Importa a classe ArrayList para criar a lista e pets
+import java.util.ArrayList; // Importa a classe ArrayList para criar a lista de pets
 
 public class Tutor { 
     private String name; 
@@ -21,7 +21,7 @@ public class Tutor {
         this.age = age; 
     }
 
-    // Métodos para obter e definir o ID do tutor
+    // getters e setters para obter e definir o ID do tutor
     public int getId() {
         return this.id; 
     }
@@ -30,7 +30,7 @@ public class Tutor {
         this.id = id; 
     }
 
-    // Métodos para obter e definir o nome do tutor
+    // getters e setters para obter e definir o nome do tutor
     public String getName() {
         return name; 
     }
@@ -39,7 +39,7 @@ public class Tutor {
         this.name = name; 
     }
 
-    // Métodos para obter e definir o endereço do tutor
+    // getters e setters para obter e definir o endereço do tutor
     public String getAddress() {
         return address; 
     }
@@ -48,7 +48,7 @@ public class Tutor {
         this.address = address;
     }
 
-    // Métodos para obter e definir a data de nascimento do tutor
+    // metodos para obter e definir a data de nascimento do tutor
     public int getYearBirth() {
         return this.yearBirth; 
     }
@@ -73,7 +73,7 @@ public class Tutor {
         this.dayBirth = dayBirth; 
     }
 
-    // Métodos para obter e definir a idade do tutor
+    // getters e setters para obter e definir a idade do tutor
     public int getAge() {
         return this.age;
     }
@@ -84,12 +84,12 @@ public class Tutor {
 
     // Método para adicionar um pet ao tutor
     public void setPet(String name, String type, int yearBirth, int monthBirth, int dayBirth) {
-        Pet pet = new Pet(name, type, yearBirth, monthBirth, dayBirth); // Cria um novo objeto Pet
+        Pet pet = new Pet(name, type, yearBirth, monthBirth, dayBirth); // chama o construtor da classe Pet
         pets.add(pet); // Adiciona o pet à lista de pets do tutor
     }
 
-    // Método para obter a lista de pets do tutor
+    // getter para obter a lista de pets do tutor
     public ArrayList<Pet> getPets() {
-        return this.pets; // Retorna a lista de pets
+        return this.pets; 
     }
 }

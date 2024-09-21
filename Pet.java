@@ -1,6 +1,6 @@
 import java.time.*; // Importa as classes de data e hora
 
-public class Pet { // Define a classe Pet
+public class Pet { 
     private String name; 
     private String type; 
     private int yearBirth; 
@@ -18,69 +18,64 @@ public class Pet { // Define a classe Pet
         setAge(); 
     }
 
-    // Método para obter o nome
+    // getters e setters para definir e obter o nome do pet
     public String getName() {
         return this.name; 
     }
 
-    // Método para definir o nome
     public void setName(String name) {
         this.name = name; 
     }
 
-    // Método para obter o tipo
+    // getters e setters para definir e obter o tipo do pet
     public String getType() {
         return type; 
     }
 
-    // Método para definir o tipo
     public void setType(String type) {
         this.type = type; 
     }
 
-    // Método para obter o ano de nascimento
+    // getters e setters para definir e obter o ano de nascimento do pet
     public int getYearBirth() {
         return this.yearBirth; 
     }
 
-    // Método para definir o ano de nascimento
     public void setYearBirth(int yearBirth) {
         this.yearBirth = yearBirth; 
     }
 
-    // Método para obter o mês de nascimento
+    // getters e setters para definir e obter o mes de nascimento do pet
     public int getMonthBirth() {
         return this.monthBirth; 
     }
 
-    // Método para definir o mês de nascimento
+
     public void setMonthBirth(int monthBirth) {
         this.monthBirth = monthBirth; 
     }
 
-    // Método para obter o dia de nascimento
+    // getters e setters para definir e obter o dia de nascimento do pet
     public int getDayBirth() {
         return this.dayBirth;
     }
 
-    // Método para definir o dia de nascimento
     public void setDayBirth(int dayBirth) {
         this.dayBirth = dayBirth; 
     }
 
-    // Método para obter a idade
+    // getters e setters para definir e obter a idade do pet
     public int getAge(){
         return this.age; 
     }
 
-    // Método para calcular e definir a idade
     public void setAge(){
-        LocalDate birthdate = LocalDate.of(getYearBirth(), getMonthBirth(), getDayBirth()); // Cria a data de nascimento
-        LocalDate currentDate = LocalDate.now(); // Obtém a data atual
+        LocalDate birthdate = LocalDate.of(getYearBirth(), getMonthBirth(), getDayBirth()); 
+        LocalDate currentDate = LocalDate.now(); // obtem a data atual
 
-        Period period = Period.between(birthdate, currentDate); // Calcula o período entre as datas
-        int age = period.getYears(); // Obtém a idade em anos
+        Period period = Period.between(birthdate, currentDate); 
+        int age = period.getYears(); // obtem a idade em anos
 
-        this.age = age; // Define a idade
+        this.age = age; // define a idade do pet
     }
 }
